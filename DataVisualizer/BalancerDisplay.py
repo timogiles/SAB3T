@@ -25,10 +25,10 @@ port = serial.Serial("/dev/ttyAMA0", baudrate=38400, timeout = 3.0)
 #port = serial.Serial("COM8", baudrate=38400, timeout = 3.0)
 
 StringOut = ""
-#w=1280
-#h=800
-w = 800
-h = 480
+w=1280
+h=800
+#w = 800
+#h = 480
 pygame.init()
 screen=pygame.display.set_mode((w,h),pygame.FULLSCREEN)
 screen2 = screen
@@ -282,11 +282,11 @@ while True:
                     
                 if GraphIndex == 1:
                     #Draw current position as fading blue circles
-                    pygame.draw.circle(screen, BLACK, [YtargetBuffer[CurLen-1],XtargetBuffer[CurLen-1]],5)
+                    pygame.draw.circle(screen, BLACK, [YtargetBuffer[CurLen-1],XtargetBuffer[CurLen-1]],10)
                     for i in range(CurLen-1):
                         val = 255-(255/CurLen*i)
-                        pygame.draw.circle(screen, [val,val,255], [YposBuffer[i],XposBuffer[i]],3)
-                    pygame.draw.circle(screen, GREEN, [YfutBuffer[CurLen-1],XfutBuffer[CurLen-1]],3)
+                        pygame.draw.circle(screen, [val,val,255], [YposBuffer[i],XposBuffer[i]],6)
+                    pygame.draw.circle(screen, GREEN, [YfutBuffer[CurLen-1],XfutBuffer[CurLen-1]],6)
                     
                 if GraphIndex == 2:
                     #make grid
@@ -338,11 +338,11 @@ while True:
                             pygame.draw.line(screen, LCYAN, [int((i)*w/CurLen),YshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),YshiftBuffer[i+1]+h/2],3)
 
                     #overlay position
-                    pygame.draw.circle(screen, BLACK, [YtargetBuffer[CurLen-1],XtargetBuffer[CurLen-1]],3)
+                    pygame.draw.circle(screen, BLACK, [YtargetBuffer[CurLen-1],XtargetBuffer[CurLen-1]],10)
                     for i in range(CurLen-1):
                         val = 255-(255/CurLen*i)
-                        pygame.draw.circle(screen, [val,val,255], [YposBuffer[i],XposBuffer[i]],3)
-                    pygame.draw.circle(screen, GREEN, [YfutBuffer[CurLen-1],XfutBuffer[CurLen-1]],3)
+                        pygame.draw.circle(screen, [val,val,255], [YposBuffer[i],XposBuffer[i]],6)
+                    pygame.draw.circle(screen, GREEN, [YfutBuffer[CurLen-1],XfutBuffer[CurLen-1]],6)
                     
                 if TextOverlay == True:
                     offset = 0
