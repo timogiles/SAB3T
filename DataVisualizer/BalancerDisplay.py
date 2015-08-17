@@ -67,7 +67,11 @@ Graph_int = 1
 Graph_angle = 1
 Graph_shift = 1
 pygame.font.init()
-basicFont = pygame.font.SysFont(None, 15)
+
+FontHeight = 30
+LineThickness = 6
+
+basicFont = pygame.font.SysFont(None, FontHeight)
 ActiveAdjust = 1 #set which PID value is active for Key up / Key down adjustment
 Kp = 10
 Kd = 10
@@ -121,6 +125,9 @@ while True:
                 #send a command that will cause the arduino to hang
                 #this is test if it is hearing the PI talk to it.
                 port.write("s\r")
+	    elif e.key == K_e:
+		#send the command "e" which will store the current servo positions as center to EEPROM
+		port.write("e\r")
             elif e.key == K_c:
                 if AdjustBy == 1:
                     AdjustBy = 5
@@ -298,20 +305,20 @@ while True:
                     #GraphData
                     for i in range(CurLen-1):
                         if Graph_err == 1:
-                            pygame.draw.line(screen, RED, [int((i)*w/CurLen),XerrBuffer[i]+h/2], [int((i+1)*w/CurLen),XerrBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LRED, [int((i)*w/CurLen),YerrBuffer[i]+h/2], [int((i+1)*w/CurLen),YerrBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, RED, [int((i)*w/CurLen),XerrBuffer[i]+h/2], [int((i+1)*w/CurLen),XerrBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LRED, [int((i)*w/CurLen),YerrBuffer[i]+h/2], [int((i+1)*w/CurLen),YerrBuffer[i+1]+h/2],LineThickness)
                         if Graph_diff == 1:
-                            pygame.draw.line(screen, GREEN, [int((i)*w/CurLen),XdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),XdiffBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LGREEN, [int((i)*w/CurLen),YdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),YdiffBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, GREEN, [int((i)*w/CurLen),XdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),XdiffBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LGREEN, [int((i)*w/CurLen),YdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),YdiffBuffer[i+1]+h/2],LineThickness)
                         if Graph_int == 1:
-                            pygame.draw.line(screen, ORANGE, [int((i)*w/CurLen),XintBuffer[i]+h/2], [int((i+1)*w/CurLen),XintBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LORANGE, [int((i)*w/CurLen),YintBuffer[i]+h/2], [int((i+1)*w/CurLen),YintBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, ORANGE, [int((i)*w/CurLen),XintBuffer[i]+h/2], [int((i+1)*w/CurLen),XintBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LORANGE, [int((i)*w/CurLen),YintBuffer[i]+h/2], [int((i+1)*w/CurLen),YintBuffer[i+1]+h/2],LineThickness)
                         if Graph_angle == 1:
-                            pygame.draw.line(screen, MAGENTA, [int((i)*w/CurLen),XangleBuffer[i]+h/2], [int((i+1)*w/CurLen),XangleBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LMAGENTA, [int((i)*w/CurLen),YangleBuffer[i]+h/2], [int((i+1)*w/CurLen),YangleBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, MAGENTA, [int((i)*w/CurLen),XangleBuffer[i]+h/2], [int((i+1)*w/CurLen),XangleBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LMAGENTA, [int((i)*w/CurLen),YangleBuffer[i]+h/2], [int((i+1)*w/CurLen),YangleBuffer[i+1]+h/2],LineThickness)
                         if Graph_shift == 1:
-                            pygame.draw.line(screen, CYAN, [int((i)*w/CurLen),XshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),XshiftBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LCYAN, [int((i)*w/CurLen),YshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),YshiftBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, CYAN, [int((i)*w/CurLen),XshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),XshiftBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LCYAN, [int((i)*w/CurLen),YshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),YshiftBuffer[i+1]+h/2],LineThickness)
                 if GraphIndex == 3:
                     #make grid
                     for i in range(9):
@@ -322,20 +329,20 @@ while True:
                     #GraphData
                     for i in range(CurLen-1):
                         if Graph_err == 1:
-                            pygame.draw.line(screen, RED, [int((i)*w/CurLen),XerrBuffer[i]+h/2], [int((i+1)*w/CurLen),XerrBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LRED, [int((i)*w/CurLen),YerrBuffer[i]+h/2], [int((i+1)*w/CurLen),YerrBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, RED, [int((i)*w/CurLen),XerrBuffer[i]+h/2], [int((i+1)*w/CurLen),XerrBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LRED, [int((i)*w/CurLen),YerrBuffer[i]+h/2], [int((i+1)*w/CurLen),YerrBuffer[i+1]+h/2],LineThickness)
                         if Graph_diff == 1:
-                            pygame.draw.line(screen, GREEN, [int((i)*w/CurLen),XdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),XdiffBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LGREEN, [int((i)*w/CurLen),YdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),YdiffBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, GREEN, [int((i)*w/CurLen),XdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),XdiffBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LGREEN, [int((i)*w/CurLen),YdiffBuffer[i]+h/2], [int((i+1)*w/CurLen),YdiffBuffer[i+1]+h/2],LineThickness)
                         if Graph_int == 1:
-                            pygame.draw.line(screen, ORANGE, [int((i)*w/CurLen),XintBuffer[i]+h/2], [int((i+1)*w/CurLen),XintBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LORANGE, [int((i)*w/CurLen),YintBuffer[i]+h/2], [int((i+1)*w/CurLen),YintBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, ORANGE, [int((i)*w/CurLen),XintBuffer[i]+h/2], [int((i+1)*w/CurLen),XintBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LORANGE, [int((i)*w/CurLen),YintBuffer[i]+h/2], [int((i+1)*w/CurLen),YintBuffer[i+1]+h/2],LineThickness)
                         if Graph_angle == 1:
-                            pygame.draw.line(screen, MAGENTA, [int((i)*w/CurLen),XangleBuffer[i]+h/2], [int((i+1)*w/CurLen),XangleBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LMAGENTA, [int((i)*w/CurLen),YangleBuffer[i]+h/2], [int((i+1)*w/CurLen),YangleBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, MAGENTA, [int((i)*w/CurLen),XangleBuffer[i]+h/2], [int((i+1)*w/CurLen),XangleBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LMAGENTA, [int((i)*w/CurLen),YangleBuffer[i]+h/2], [int((i+1)*w/CurLen),YangleBuffer[i+1]+h/2],LineThickness)
                         if Graph_shift == 1:
-                            pygame.draw.line(screen, CYAN, [int((i)*w/CurLen),XshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),XshiftBuffer[i+1]+h/2],3)
-                            pygame.draw.line(screen, LCYAN, [int((i)*w/CurLen),YshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),YshiftBuffer[i+1]+h/2],3)
+                            pygame.draw.line(screen, CYAN, [int((i)*w/CurLen),XshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),XshiftBuffer[i+1]+h/2],LineThickness)
+                            pygame.draw.line(screen, LCYAN, [int((i)*w/CurLen),YshiftBuffer[i]+h/2], [int((i+1)*w/CurLen),YshiftBuffer[i+1]+h/2],LineThickness)
 
                     #overlay position
                     pygame.draw.circle(screen, BLACK, [YtargetBuffer[CurLen-1],XtargetBuffer[CurLen-1]],10)
@@ -355,11 +362,11 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X pos: " + str(Xpos), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
                     text = basicFont.render("Y pos: " + str(Ypos), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_err == 1:
@@ -368,7 +375,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X err: " + str(Xerr), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_err == 1:
                         CurColor = LRED
@@ -376,7 +383,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Y err: " + str(Yerr), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
                     
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_diff == 1:
@@ -385,7 +392,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X diff: " + str(Xdiff), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_diff ==1:
                         CurColor = LGREEN
@@ -393,7 +400,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Y diff: " + str(Ydiff), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_int == 1:
@@ -402,7 +409,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X int: " + str(float(Xint)/50), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_int == 1:
@@ -411,7 +418,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Y int: " + str(float(Yint)/50), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
 
 
@@ -421,7 +428,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X angle: " + str(Xangle), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_angle == 1:
                         CurColor = LMAGENTA
@@ -429,7 +436,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Y angle: " + str(Yangle), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_shift == 1:
@@ -438,7 +445,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("X shift: " + str(Xshift), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
 
                     if (GraphIndex == 2 or GraphIndex == 3) and Graph_shift == 1:
                         CurColor = LCYAN
@@ -446,17 +453,17 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Y shift: " + str(Yshift), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
 
-                    offset += 15
+                    offset += FontHeight
                     if ActiveAdjust ==  1:
                         CurColor = RED
                     else:
                         CurColor = BLACK
                     text = basicFont.render("Kp: " + str(Kp), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
                     if ActiveAdjust ==  2:
                         CurColor = RED
@@ -464,7 +471,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Kd: " + str(Kd), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
                     if ActiveAdjust ==  3:
                         CurColor = RED
@@ -472,7 +479,7 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Ki: " + str(Ki), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
                     if ActiveAdjust ==  4:
                         CurColor = RED
@@ -480,9 +487,11 @@ while True:
                         CurColor = BLACK
                     text = basicFont.render("Kf: " + str(Kf), True, CurColor)
                     screen.blit(text,(0,offset))
-                    offset += 15
+                    offset += FontHeight
                     CurColor = BLACK
-
+		    offset += FontHeight
+		    text = basicFont.render("Press E to store current position to EEPROM as start position", True, CurColor)
+		    screen.blit(text,(0,offset))	
 
                 pygame.display.flip()
         else:
